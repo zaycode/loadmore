@@ -6,7 +6,7 @@ import androidx.annotation.NonNull;
 public class LoadMoreConfig {
     private static int globalLoadingView = R.layout.loadmore_loading;
     private static int globalLoadFailedView = R.layout.loadmore_fail;
-    private static int globalLoadFinishView = R.layout.loadmore_finish;
+    private static int globalLoadFinishView = R.layout.loadmore_fail;
     int loadingView;
     int loadFailedView;
     int loadFinishView;
@@ -69,7 +69,7 @@ public class LoadMoreConfig {
             return this;
         }
 
-        LoadMoreConfig create() {
+        public LoadMoreConfig create() {
             return new LoadMoreConfig(this);
         }
     }

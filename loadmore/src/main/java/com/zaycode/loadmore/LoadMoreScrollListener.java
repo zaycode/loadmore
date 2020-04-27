@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 
 abstract class LoadMoreScrollListener extends RecyclerView.OnScrollListener {
 
-    private LinearLayoutManager linearLayoutManager;
+    private LinearLayoutManager lm;
     private StaggeredGridLayoutManager sm;
     private int[] lastPositions;
     private int totalItemCount;
@@ -16,16 +16,16 @@ abstract class LoadMoreScrollListener extends RecyclerView.OnScrollListener {
     public void onScrollStateChanged(RecyclerView recyclerView, int newState) {
         super.onScrollStateChanged(recyclerView, newState);
         if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
-            linearLayoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
+            lm = (LinearLayoutManager) recyclerView.getLayoutManager();
         } else if (recyclerView.getLayoutManager() instanceof StaggeredGridLayoutManager) {
             sm = (StaggeredGridLayoutManager) recyclerView.getLayoutManager();
             lastPositions = sm.findLastVisibleItemPositions(null);
         }
 
         int visibleItemCount = recyclerView.getChildCount();
-        if (linearLayoutManager != null) {
-            totalItemCount = linearLayoutManager.getItemCount();
-            lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
+        if (lm != null) {
+            totalItemCount = lm.getItemCount();
+            lastVisibleItemPosition = lm.findLastVisibleItemPosition();
         } else if (sm != null) {
             totalItemCount = sm.getItemCount();
             lastVisibleItemPosition = lastPositions[0];

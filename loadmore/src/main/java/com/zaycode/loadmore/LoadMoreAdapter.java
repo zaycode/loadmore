@@ -1,5 +1,6 @@
 package com.zaycode.loadmore;
 
+
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -13,7 +14,6 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager;
 import static android.view.ViewGroup.LayoutParams.MATCH_PARENT;
 import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
-@SuppressWarnings("unused")
 public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
 
     private static final int ITEM_TYPE_LOAD_FAILED_VIEW = Integer.MAX_VALUE - 1;
@@ -22,7 +22,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     private static final int ITEM_TYPE_NO_VIEW = Integer.MAX_VALUE - 4;
 
     private RecyclerView.Adapter mInnerAdapter;
-    private LoadMoreScrollListener loadMoreScrollListener;
+    private LoadMoreScrollListener mLoadMoreScrollListener;
 
     private int mCurrentItemType = ITEM_TYPE_LOAD_MORE_VIEW;
     private boolean isLoadError = false;
@@ -39,7 +39,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
     public LoadMoreAdapter(Context context, RecyclerView.Adapter adapter) {
         this.mInnerAdapter = adapter;
         mInflater = LayoutInflater.from(context);
-        loadMoreScrollListener = new LoadMoreScrollListener() {
+        mLoadMoreScrollListener = new LoadMoreScrollListener() {
             @Override
             public void loadMore() {
                 if (isDisabled || isLoading || isLoadCompleted || isLoadError) {
@@ -197,7 +197,7 @@ public class LoadMoreAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolde
         } else if (layoutManager instanceof StaggeredGridLayoutManager) {
             StaggeredGridLayoutManager staggeredGridLayoutManager = (StaggeredGridLayoutManager) layoutManager;
         }
-        recyclerView.addOnScrollListener(loadMoreScrollListener);
+        recyclerView.addOnScrollListener(mLoadMoreScrollListener);
     }
 
 
